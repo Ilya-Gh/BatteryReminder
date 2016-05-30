@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Low Battery Reminder</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="text_view">Low battery</string>
+    <string name="remain">Remaining %d%%</string>
+    <string name="button">OK</string>
+
+</resources>
