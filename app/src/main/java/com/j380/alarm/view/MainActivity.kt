@@ -1,8 +1,9 @@
-package com.j380.alarm
+package com.j380.alarm.view
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.j380.alarm.BatteryService
 
 class MainActivity : AppCompatActivity() {
 

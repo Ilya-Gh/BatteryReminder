@@ -1,14 +1,14 @@
-package com.j380.alarm
+package com.j380.alarm.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.j380.alarm.BatteryService
 
 class BootBroadcastReceiver : BroadcastReceiver () {
 
     override fun onReceive(context: Context, intent: Intent?) {
-        val batteryIntent = Intent(context, BatteryService::class.java)
-        context.startService(batteryIntent)
+        val startServiceIntent = Intent(context, BatteryService::class.java)
+        context.startService(startServiceIntent)
     }
-
 }
