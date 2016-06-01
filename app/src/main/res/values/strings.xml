@@ -8,4 +8,6 @@
     <string name="remain">Remaining %d%%</string>
     <string name="button">OK</string>
 
+    <string name="checkBatteryIntentAction">checkBatteryAction</string>
+
 </resources>

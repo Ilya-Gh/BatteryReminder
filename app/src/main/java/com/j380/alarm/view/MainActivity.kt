@@ -12,6 +12,4 @@ class MainActivity : AppCompatActivity() {
         val batteryIntent = Intent(this, BatteryService::class.java)
         startService(batteryIntent)
     }
-
-
 }

@@ -8,12 +8,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.IBinder
-import com.j380.alarm.receivers.AlertBroadcastReceiver
 import com.j380.alarm.view.AlertView
 
 class BatteryService : Service() {
-
-    private var alertBroadcastReceiver = AlertBroadcastReceiver()
 
     private var batteryPercents: Float = 0f
 
@@ -32,11 +29,6 @@ class BatteryService : Service() {
         alertView.initView()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(alertBroadcastReceiver)
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         checkBattery()
         return START_STICKY
@@ -44,7 +36,7 @@ class BatteryService : Service() {
 
     fun setAlarm() {
         val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager;
-        val lIntent = Intent(AlertBroadcastReceiver.);
+        val lIntent = Intent(getString(R.string.checkBatteryIntentAction));
         val lPendingIntent = PendingIntent.getBroadcast(applicationContext, 0, lIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
                 AlarmManager.INTERVAL_FIFTEEN_MINUTES, lPendingIntent);
