@@ -32,6 +32,11 @@ class BatteryService : Service() {
         return START_STICKY
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        alertView.close()
+    }
+
     private fun setAlarm() {
         val alarmManager = applicationContext.getSystemService(
                 Context.ALARM_SERVICE) as AlarmManager;

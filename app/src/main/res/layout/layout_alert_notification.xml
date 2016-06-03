@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_padding"
+            android:text="@string/text_view"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size"
+            />
+
+    <TextView
+            android:id="@+id/remainingTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/remain_padding"
+            android:text="@string/remain"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size"
+            />
+
+    <Button
+            android:id="@+id/okBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_padding"
+            android:text="@string/button"
+            android:textSize="@dimen/text_size"
+            />
+
+</LinearLayout>

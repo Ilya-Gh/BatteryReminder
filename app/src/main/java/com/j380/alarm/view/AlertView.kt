@@ -10,20 +10,23 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import android.widget.Button
+import android.widget.TextView
 import com.j380.alarm.R
 
 
 class AlertView(context: Context) {
+
     private val context = context
+    private val player = MediaPlayer.create(context, R.raw.low)
+    private val audioManager = context.getSystemService(Service.AUDIO_SERVICE) as AudioManager
     private val windowManager = context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
     private val inflater = context.getSystemService(
             Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    private val view = inflater.inflate(R.layout.aler_notification, null)
-    private val button = view.findViewById(R.id.button) as Button
-    private val player = MediaPlayer.create(context, R.raw.low)
-    private val audioManager = context.getSystemService(Service.AUDIO_SERVICE) as AudioManager
+    private val view = inflater.inflate(R.layout.layout_alert_notification, null)
+    private val okButton = view.findViewById(R.id.okBtn) as Button
+    private val remainingTv = view.findViewById(R.id.remainingTv) as TextView
 
-    val lParams = LayoutParams(
+    private val lParams = LayoutParams(
             LayoutParams.WRAP_CONTENT,
             LayoutParams.WRAP_CONTENT,
             LayoutParams.TYPE_SYSTEM_ALERT,
@@ -34,10 +37,13 @@ class AlertView(context: Context) {
 
         lParams.gravity = Gravity.CENTER
 
-        button.setOnClickListener({
+        okButton.setOnClickListener({
             close()
         })
+        setPlayerListeners()
+    }
 
+    private fun setPlayerListeners() {
         player.setOnSeekCompleteListener({
             mediaPlayer: MediaPlayer ->
             mediaPlayer.stop()
@@ -51,20 +57,22 @@ class AlertView(context: Context) {
     }
 
     fun show(batteryLevel: Float) {
-
-        //        ((TextView) mView.findViewById(R.id.remain)).setText(String.Companion.format(getString(R.string.remain), (int) mBatteryPct));
-        //
-
+        remainingTv.setText(String.format(context.getString(R.string.remain), batteryLevel));
         windowManager.addView(view, lParams)
     }
 
     fun playAudio() {
-        val volume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
-        player.setVolume(volume.toFloat(), volume.toFloat())
+        setVolumeToPlayer(player, getVolume())
         player.start()
     }
 
-    fun close() {
+    private fun getVolume() = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+
+    private fun setVolumeToPlayer(player: MediaPlayer, volume: Int) {
+        player.setVolume(volume.toFloat(), volume.toFloat())
+    }
+
+    public fun close() {
         windowManager.removeViewImmediate(view)
     }
 
