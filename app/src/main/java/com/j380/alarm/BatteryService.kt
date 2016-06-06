@@ -9,12 +9,15 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.IBinder
 import com.j380.alarm.view.AlertView
+import com.j380.alarm.view.AlertViewImpl
 
 class BatteryService : Service() {
 
     private val LOW_BATTERY_LEVEL = 25f
 
     private lateinit var alertView: AlertView
+
+    private lateinit var batteryStatus: Intent
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -23,7 +26,7 @@ class BatteryService : Service() {
     override fun onCreate() {
         super.onCreate()
         setAlarm()
-        alertView = AlertView(this)
+        alertView = AlertViewImpl(this)
         alertView.initView()
     }
 
@@ -34,7 +37,7 @@ class BatteryService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        alertView.close()
+        alertView.hideAlert()
     }
 
     private fun setAlarm() {
@@ -48,11 +51,10 @@ class BatteryService : Service() {
     }
 
     private fun checkBattery() {
-        val batteryStatus = getBatteryStatusIntent()
+        batteryStatus = getBatteryStatusIntent()
 
-        if(isNotPluggedIn(batteryStatus)) {
-            val batteryLevel = convertBatteryLevelToPercent(getRawBatteryLevel(batteryStatus),
-                    getBatteryScale(batteryStatus))
+        if (isNotPluggedIn()) {
+            val batteryLevel = convertBatteryLevelToPercent(getRawBatteryLevel(), getBatteryScale())
             showViewIfBatteryLevelIsLow(batteryLevel)
         }
     }
@@ -62,33 +64,32 @@ class BatteryService : Service() {
         return applicationContext.registerReceiver(null, lFilter)
     }
 
-    private fun getRawBatteryLevel(batteryStatus: Intent) = batteryStatus.getIntExtra(
+    private fun getRawBatteryLevel() = batteryStatus.getIntExtra(
             BatteryManager.EXTRA_LEVEL, -1)
 
-    private fun getBatteryScale(batteryStatus: Intent) = batteryStatus.getIntExtra(
+    private fun getBatteryScale() = batteryStatus.getIntExtra(
             BatteryManager.EXTRA_SCALE, -1)
 
     private fun convertBatteryLevelToPercent(rawLevel: Int, scale: Int): Float {
         return rawLevel / scale.toFloat() * 100;
     }
 
-    private fun getTypeOfChargePlug(batteryStatus: Intent) = batteryStatus.getIntExtra(
+    private fun getTypeOfChargePlug() = batteryStatus.getIntExtra(
             BatteryManager.EXTRA_PLUGGED, -1)
 
-    private fun isNotPluggedIn(batteryStatus: Intent) = !isPluggedInUsbCharger(batteryStatus) &&
-            !isPluggedInAcCharger(batteryStatus)
+    private fun isNotPluggedIn() = !isPluggedInUsbCharger() && !isPluggedInAcCharger()
 
-    private fun isPluggedInUsbCharger(batteryStatus: Intent): Boolean {
-        return getTypeOfChargePlug(batteryStatus) == BatteryManager.BATTERY_PLUGGED_USB
+    private fun isPluggedInUsbCharger(): Boolean {
+        return getTypeOfChargePlug() == BatteryManager.BATTERY_PLUGGED_USB
     }
 
-    private fun isPluggedInAcCharger(batteryStatus: Intent): Boolean {
-        return getTypeOfChargePlug(batteryStatus) == BatteryManager.BATTERY_PLUGGED_AC
+    private fun isPluggedInAcCharger(): Boolean {
+        return getTypeOfChargePlug() == BatteryManager.BATTERY_PLUGGED_AC
     }
 
     private fun showViewIfBatteryLevelIsLow(batteryLevel: Float) {
-        if (batteryLevel <= LOW_BATTERY_LEVEL ) {
-            alertView.show(batteryLevel);
+        if (batteryLevel <= LOW_BATTERY_LEVEL) {
+            alertView.showLowBatteryAlert(batteryLevel);
         }
     }
 }
