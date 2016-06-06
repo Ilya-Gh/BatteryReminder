@@ -70,8 +70,8 @@ class BatteryService : Service() {
     private fun getBatteryScale() = batteryStatus.getIntExtra(
             BatteryManager.EXTRA_SCALE, -1)
 
-    private fun convertBatteryLevelToPercent(rawLevel: Int, scale: Int): Float {
-        return rawLevel / scale.toFloat() * 100;
+    private fun convertBatteryLevelToPercent(rawLevel: Int, scale: Int): Int {
+        return rawLevel / scale * 100;
     }
 
     private fun getTypeOfChargePlug() = batteryStatus.getIntExtra(
@@ -87,7 +87,7 @@ class BatteryService : Service() {
         return getTypeOfChargePlug() == BatteryManager.BATTERY_PLUGGED_AC
     }
 
-    private fun showViewIfBatteryLevelIsLow(batteryLevel: Float) {
+    private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {
         if (batteryLevel <= LOW_BATTERY_LEVEL) {
             alertView.showLowBatteryAlert(batteryLevel);
         }
