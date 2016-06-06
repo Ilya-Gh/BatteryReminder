@@ -46,7 +46,7 @@ class AlertViewImpl(context: Context) : AlertView {
         player.stop()
     }
 
-    override fun showLowBatteryAlert(batteryLevel: Float) {
+    override fun showLowBatteryAlert(batteryLevel: Int) {
         remainingTv.text = String.format(context.getString(R.string.remain), batteryLevel);
         windowManager.addView(view, lParams)
         playAudio()

@@ -6,5 +6,5 @@ interface AlertView {
 
     fun hideAlert()
 
-    fun showLowBatteryAlert(batteryLevel: Float)
+    fun showLowBatteryAlert(batteryLevel: Int)
 }
