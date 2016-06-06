@@ -71,7 +71,7 @@ class BatteryService : Service() {
             BatteryManager.EXTRA_SCALE, -1)
 
     private fun convertBatteryLevelToPercent(rawLevel: Int, scale: Int): Int {
-        return rawLevel / scale * 100;
+        return (rawLevel / scale.toFloat() * 100).toInt();
     }
 
     private fun getTypeOfChargePlug() = batteryStatus.getIntExtra(
