@@ -27,7 +27,7 @@ class AlertViewImpl(context: Context) : AlertView {
     private val remainingTv = view.findViewById(R.id.remainingTv) as TextView
 
     private val lParams = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
+            LayoutParams.MATCH_PARENT,
             LayoutParams.WRAP_CONTENT,
             LayoutParams.TYPE_SYSTEM_ALERT,
             LayoutParams.FLAG_NOT_FOCUSABLE,
@@ -43,7 +43,6 @@ class AlertViewImpl(context: Context) : AlertView {
 
     override fun hideAlert() {
         windowManager.removeViewImmediate(view)
-        player.stop()
     }
 
     override fun showLowBatteryAlert(batteryLevel: Int) {
@@ -75,5 +74,4 @@ class AlertViewImpl(context: Context) : AlertView {
     private fun setVolumeToPlayer(player: MediaPlayer, volume: Int) {
         player.setVolume(volume.toFloat(), volume.toFloat())
     }
-
 }
