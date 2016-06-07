@@ -6,8 +6,8 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.BatteryManager
 import android.os.IBinder
+import com.j380.alarm.interactor.BatteryInteractorImpl
 import com.j380.alarm.view.AlertView
 import com.j380.alarm.view.AlertViewImpl
 
@@ -18,6 +18,8 @@ class BatteryService : Service() {
     private lateinit var alertView: AlertView
 
     private lateinit var batteryStatus: Intent
+
+    private var batteryInteractor = BatteryInteractorImpl()
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -52,39 +54,16 @@ class BatteryService : Service() {
 
     private fun checkBattery() {
         batteryStatus = getBatteryStatusIntent()
+        batteryInteractor.setBatteryStatus(batteryStatus)
 
-        if (isNotPluggedIn()) {
-            val batteryLevel = convertBatteryLevelToPercent(getRawBatteryLevel(), getBatteryScale())
-            showViewIfBatteryLevelIsLow(batteryLevel)
+        if (batteryInteractor.isNotPluggedIn()) {
+            showViewIfBatteryLevelIsLow(batteryInteractor.getBatteryLevel())
         }
     }
 
     private fun getBatteryStatusIntent(): Intent {
         val lFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         return applicationContext.registerReceiver(null, lFilter)
-    }
-
-    private fun getRawBatteryLevel() = batteryStatus.getIntExtra(
-            BatteryManager.EXTRA_LEVEL, -1)
-
-    private fun getBatteryScale() = batteryStatus.getIntExtra(
-            BatteryManager.EXTRA_SCALE, -1)
-
-    private fun convertBatteryLevelToPercent(rawLevel: Int, scale: Int): Int {
-        return (rawLevel / scale.toFloat() * 100).toInt();
-    }
-
-    private fun getTypeOfChargePlug() = batteryStatus.getIntExtra(
-            BatteryManager.EXTRA_PLUGGED, -1)
-
-    private fun isNotPluggedIn() = !isPluggedInUsbCharger() && !isPluggedInAcCharger()
-
-    private fun isPluggedInUsbCharger(): Boolean {
-        return getTypeOfChargePlug() == BatteryManager.BATTERY_PLUGGED_USB
-    }
-
-    private fun isPluggedInAcCharger(): Boolean {
-        return getTypeOfChargePlug() == BatteryManager.BATTERY_PLUGGED_AC
     }
 
     private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {
