@@ -24,7 +24,7 @@
                 android:launchMode="singleTask"
                 />
 
-        <receiver android:name=".receivers.BatteryBroadcastReceiver">
+        <receiver android:name=".receiver.BatteryBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

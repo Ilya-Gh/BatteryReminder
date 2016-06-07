@@ -1,4 +1,4 @@
-package com.j380.alarm.receivers
+package com.j380.alarm.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
