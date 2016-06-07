@@ -17,7 +17,7 @@ import com.j380.alarm.R
 class AlertViewImpl(context: Context) : AlertView {
 
     private val context = context
-    private val player = MediaPlayer.create(context, R.raw.low)
+    private lateinit var player: MediaPlayer
     private val audioManager = context.getSystemService(Service.AUDIO_SERVICE) as AudioManager
     private val windowManager = context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
     private val inflater = context.getSystemService(
@@ -65,8 +65,14 @@ class AlertViewImpl(context: Context) : AlertView {
     }
 
     private fun playAudio() {
-        setVolumeToPlayer(player, getVolume())
+        prepareMediaPlayer()
         player.start()
+    }
+
+    //TODO move this logic to presenter
+    private fun prepareMediaPlayer() {
+        player = MediaPlayer.create(context, R.raw.low)
+        setVolumeToPlayer(player, getVolume())
     }
 
     private fun getVolume() = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
