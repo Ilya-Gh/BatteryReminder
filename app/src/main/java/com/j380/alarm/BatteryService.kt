@@ -7,9 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import com.j380.alarm.interactor.BatteryInteractorImpl
+import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.presenter.AlertViewPresenter
 import com.j380.alarm.presenter.AlertViewPresenterImpl
+import javax.inject.Inject
 
 class BatteryService : Service() {
 
@@ -19,7 +20,7 @@ class BatteryService : Service() {
 
     private lateinit var batteryStatus: Intent
 
-    private var batteryInteractor = BatteryInteractorImpl()
+    @Inject lateinit var batteryInteractor: BatteryInteractor
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
