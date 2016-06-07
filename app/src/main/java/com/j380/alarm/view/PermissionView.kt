@@ -9,4 +9,5 @@ interface PermissionView {
 
     fun startService(intent: Intent): ComponentName
 
+    fun closeActivity()
 }

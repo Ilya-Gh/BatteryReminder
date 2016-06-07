@@ -20,4 +20,7 @@ class PermissionActivity : AppCompatActivity(), PermissionView {
         presenter.onActivityResult(requestCode, resultCode, data)
     }
 
+    override fun closeActivity() = finish()
+
+
 }

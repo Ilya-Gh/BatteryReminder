@@ -35,6 +35,7 @@ class PermissionPresenterImpl(val context: Context, val view: PermissionView) : 
 
     private fun startBatteryService() {
         view.startService(intentInteractor.getStartBatteryServiceIntent())
+        view.closeActivity()
 
     }
 }
