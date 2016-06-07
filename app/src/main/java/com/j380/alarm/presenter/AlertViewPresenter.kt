@@ -1,6 +1,6 @@
-package com.j380.alarm.view;
+package com.j380.alarm.presenter;
 
-interface AlertView {
+interface AlertViewPresenter {
 
     fun initView()
 

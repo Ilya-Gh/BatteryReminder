@@ -8,14 +8,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import com.j380.alarm.interactor.BatteryInteractorImpl
-import com.j380.alarm.view.AlertView
-import com.j380.alarm.view.AlertViewImpl
+import com.j380.alarm.presenter.AlertViewPresenter
+import com.j380.alarm.presenter.AlertViewPresenterImpl
 
 class BatteryService : Service() {
 
     private val LOW_BATTERY_LEVEL = 25f
 
-    private lateinit var alertView: AlertView
+    private lateinit var alertView: AlertViewPresenter
 
     private lateinit var batteryStatus: Intent
 
@@ -28,7 +28,7 @@ class BatteryService : Service() {
     override fun onCreate() {
         super.onCreate()
         setAlarm()
-        alertView = AlertViewImpl(this)
+        alertView = AlertViewPresenterImpl(this)
         alertView.initView()
     }
 

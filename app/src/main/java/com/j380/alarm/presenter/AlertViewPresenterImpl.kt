@@ -1,4 +1,4 @@
-package com.j380.alarm.view
+package com.j380.alarm.presenter
 
 import android.app.Service
 import android.content.Context
@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.j380.alarm.R
 
 
-class AlertViewImpl(context: Context) : AlertView {
+class AlertViewPresenterImpl(context: Context) : AlertViewPresenter {
 
     private val context = context
     private lateinit var player: MediaPlayer
@@ -69,7 +69,6 @@ class AlertViewImpl(context: Context) : AlertView {
         player.start()
     }
 
-    //TODO move this logic to presenter
     private fun prepareMediaPlayer() {
         player = MediaPlayer.create(context, R.raw.low)
         setVolumeToPlayer(player, getVolume())
