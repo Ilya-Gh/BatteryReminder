@@ -1,7 +1,8 @@
-package com.j380.alarm.injection
+package com.j380.alarm.injection.component
 
 import android.content.Context
 import com.j380.alarm.BatteryService
+import com.j380.alarm.injection.module.AppModule
 import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.view.PermissionActivity
 import dagger.Component
