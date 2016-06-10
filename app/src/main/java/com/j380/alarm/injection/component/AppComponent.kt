@@ -4,7 +4,6 @@ import android.content.Context
 import com.j380.alarm.BatteryService
 import com.j380.alarm.injection.module.AppModule
 import com.j380.alarm.interactor.BatteryInteractor
-import com.j380.alarm.view.PermissionActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -14,8 +13,7 @@ interface AppComponent {
 
     fun inject(service: BatteryService)
 
-    fun inject(activity: PermissionActivity)
-
+    fun plus(): PermissionActivityComponent
 
     fun context(): Context
 

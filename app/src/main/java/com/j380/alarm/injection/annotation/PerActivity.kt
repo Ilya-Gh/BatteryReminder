@@ -1,4 +1,4 @@
-package com.j380.alarm.injection.annotations
+package com.j380.alarm.injection.annotation
 
 import javax.inject.Scope
 
