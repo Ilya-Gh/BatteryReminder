@@ -45,12 +45,12 @@ class BatteryService : Service() {
 
     private fun setAlarm() {
         val alarmManager = applicationContext.getSystemService(
-                Context.ALARM_SERVICE) as AlarmManager;
-        val lIntent = Intent(getString(R.string.checkBatteryIntentAction));
+                Context.ALARM_SERVICE) as AlarmManager
+        val lIntent = Intent(getString(R.string.checkBatteryIntentAction))
         val lPendingIntent = PendingIntent.getBroadcast(applicationContext, 0, lIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT)
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES, lPendingIntent);
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, lPendingIntent)
     }
 
     private fun checkBattery() {
@@ -69,7 +69,7 @@ class BatteryService : Service() {
 
     private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {
         if (batteryLevel <= LOW_BATTERY_LEVEL) {
-            alertView.showLowBatteryAlert(batteryLevel);
+            alertView.showLowBatteryAlert(batteryLevel)
         }
     }
 }

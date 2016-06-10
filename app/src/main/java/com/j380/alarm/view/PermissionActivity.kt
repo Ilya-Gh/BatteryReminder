@@ -29,6 +29,4 @@ class PermissionActivity : AppCompatActivity(), PermissionView {
         component = BatteryReminderApplication.appComponent.plus()
         component.inject(this)
     }
-
-
 }
