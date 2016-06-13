@@ -33,8 +33,6 @@ class AlertViewPresenterImpl(val context: Context, val audioManager: AudioManage
         okButton.setOnClickListener({
             hideAlert()
         })
-        prepareMediaPlayer()
-        setPlayerListeners()
     }
 
     override fun hideAlert() {
@@ -67,6 +65,7 @@ class AlertViewPresenterImpl(val context: Context, val audioManager: AudioManage
 
     private fun prepareMediaPlayer() {
         player = MediaPlayer.create(context, R.raw.low)
+        setPlayerListeners()
         setVolumeToPlayer(player, getVolume())
     }
 
