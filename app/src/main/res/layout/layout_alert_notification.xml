@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/text_padding"
-            android:text="@string/button"
+            android:text="@string/ok_button_text"
             android:textSize="@dimen/text_size"
             />
 

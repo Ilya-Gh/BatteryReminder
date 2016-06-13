@@ -3,5 +3,4 @@
 
     <string name="text_view">Заряди телефон!</string>
     <string name="remain">Осталось %d%%</string>
-    <string name="button">Oк</string>
 </resources>
