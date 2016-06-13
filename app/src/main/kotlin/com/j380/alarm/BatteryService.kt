@@ -9,18 +9,17 @@ import android.content.IntentFilter
 import android.os.IBinder
 import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.presenter.AlertViewPresenter
-import com.j380.alarm.presenter.AlertViewPresenterImpl
 import javax.inject.Inject
 
 class BatteryService : Service() {
 
     private val LOW_BATTERY_LEVEL = 25f
 
-    private lateinit var alertView: AlertViewPresenter
-
-    private lateinit var batteryStatus: Intent
+    @Inject lateinit var alertViewPresenter: AlertViewPresenter
 
     @Inject lateinit var batteryInteractor: BatteryInteractor
+
+    private lateinit var batteryStatus: Intent
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -28,9 +27,9 @@ class BatteryService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        BatteryReminderApplication.appComponent.plusBatteryComponent().inject(this)
         setAlarm()
-        alertView = AlertViewPresenterImpl(this)
-        alertView.initView()
+        alertViewPresenter.initView()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -40,7 +39,7 @@ class BatteryService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        alertView.hideAlert()
+        alertViewPresenter.hideAlert()
     }
 
     private fun setAlarm() {
@@ -69,7 +68,7 @@ class BatteryService : Service() {
 
     private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {
         if (batteryLevel <= LOW_BATTERY_LEVEL) {
-            alertView.showLowBatteryAlert(batteryLevel)
+            alertViewPresenter.showLowBatteryAlert(batteryLevel)
         }
     }
 }

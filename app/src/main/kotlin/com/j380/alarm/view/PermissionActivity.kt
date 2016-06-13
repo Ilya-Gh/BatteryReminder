@@ -4,18 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.j380.alarm.BatteryReminderApplication
-import com.j380.alarm.injection.component.PermissionActivityComponent
 import com.j380.alarm.presenter.PermissionPresenter
 import javax.inject.Inject
 
 class PermissionActivity : AppCompatActivity(), PermissionView {
 
     @Inject lateinit var presenter: PermissionPresenter
-    private lateinit var component: PermissionActivityComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initInjector()
+        presenter.setView(this)
         presenter.onCreate()
     }
 
@@ -26,7 +25,6 @@ class PermissionActivity : AppCompatActivity(), PermissionView {
     override fun closeActivity() = finish()
 
     private fun initInjector() {
-        component = BatteryReminderApplication.appComponent.plus()
-        component.inject(this)
+        BatteryReminderApplication.appComponent.plusPermissionComponent().inject(this)
     }
 }

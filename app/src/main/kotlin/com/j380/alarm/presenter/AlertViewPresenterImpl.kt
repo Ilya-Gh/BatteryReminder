@@ -1,6 +1,5 @@
 package com.j380.alarm.presenter
 
-import android.app.Service
 import android.content.Context
 import android.graphics.PixelFormat
 import android.media.AudioManager
@@ -14,15 +13,10 @@ import android.widget.TextView
 import com.j380.alarm.R
 
 
-class AlertViewPresenterImpl(context: Context) : AlertViewPresenter {
+class AlertViewPresenterImpl(val context: Context, val audioManager: AudioManager,
+        val windowManager: WindowManager, val inflater: LayoutInflater) : AlertViewPresenter {
 
-    //TODO Move this co Dagger
-    private val context = context
     private lateinit var player: MediaPlayer
-    private val audioManager = context.getSystemService(Service.AUDIO_SERVICE) as AudioManager
-    private val windowManager = context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
-    private val inflater = context.getSystemService(
-            Service.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     private val view = inflater.inflate(R.layout.layout_alert_notification, null)
     private val okButton = view.findViewById(R.id.okBtn) as Button
     private val remainingTv = view.findViewById(R.id.remainingTv) as TextView
@@ -39,6 +33,7 @@ class AlertViewPresenterImpl(context: Context) : AlertViewPresenter {
         okButton.setOnClickListener({
             hideAlert()
         })
+        prepareMediaPlayer()
         setPlayerListeners()
     }
 
