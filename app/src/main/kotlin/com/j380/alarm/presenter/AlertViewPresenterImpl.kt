@@ -16,6 +16,7 @@ import com.j380.alarm.R
 
 class AlertViewPresenterImpl(context: Context) : AlertViewPresenter {
 
+    //TODO Move this co Dagger
     private val context = context
     private lateinit var player: MediaPlayer
     private val audioManager = context.getSystemService(Service.AUDIO_SERVICE) as AudioManager
