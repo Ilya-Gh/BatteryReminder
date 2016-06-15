@@ -2,8 +2,7 @@ package com.j380.alarm.interactor
 
 import android.content.Intent
 import android.os.BatteryManager
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
+import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -44,6 +43,19 @@ class BatteryInteractorImplTest {
 
         val isNotPluggedIn = interactor.isNotPluggedIn()
         assertTrue(isNotPluggedIn)
+    }
+
+    @Test fun getBatteryLevel() {
+        val batteryLevelExpected = 18
+
+        val batteryLevel = 18
+        val batteryScale = 100
+        `when`(batteryStatus.getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt())).thenReturn(
+                batteryLevel)
+        `when`(batteryStatus.getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt())).thenReturn(
+                batteryScale)
+
+        assertEquals(batteryLevelExpected, interactor.getBatteryLevel())
     }
 }
 
