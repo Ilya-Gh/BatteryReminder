@@ -10,7 +10,7 @@ class IntentInteractorImpl(val context: Context) : IntentInteractor {
 
     override fun getRequestPermissionIntent(): Intent {
         val uri = Uri.parse("package:" + context.packageName)
-        return Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri);
+        return Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
     }
 
     override fun getStartBatteryServiceIntent() = Intent(context, BatteryService::class.java)
