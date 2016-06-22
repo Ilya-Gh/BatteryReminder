@@ -2,7 +2,7 @@ package com.j380.alarm.interactor
 
 import android.content.Context
 import android.net.Uri
-import com.j380.alarm.BatteryService
+import com.j380.alarm.service.BatteryService
 import com.j380.alarm.BuildConfig
 import junit.framework.Assert.assertEquals
 import org.junit.Before

@@ -1,6 +1,6 @@
 package com.j380.alarm.injection.component
 
-import com.j380.alarm.BatteryService
+import com.j380.alarm.service.BatteryService
 import com.j380.alarm.injection.annotation.PerService
 import com.j380.alarm.injection.module.BatteryServiceModule
 import dagger.Subcomponent

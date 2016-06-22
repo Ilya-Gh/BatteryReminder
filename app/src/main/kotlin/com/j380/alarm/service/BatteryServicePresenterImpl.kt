@@ -1,52 +1,43 @@
-package com.j380.alarm
+package com.j380.alarm.service
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import com.j380.alarm.R
 import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.presenter.AlertViewPresenter
-import javax.inject.Inject
 
-class BatteryService : Service() {
+class BatteryServicePresenterImpl(val alertViewPresenter: AlertViewPresenter,
+        val batteryInteractor: BatteryInteractor, val context: Context,
+        val alarmManager: AlarmManager): BatteryServicePresenter {
 
     private val LOW_BATTERY_LEVEL = 25f
 
-    @Inject lateinit var alertViewPresenter: AlertViewPresenter
-
-    @Inject lateinit var batteryInteractor: BatteryInteractor
-
     private lateinit var batteryStatus: Intent
 
-    override fun onBind(intent: Intent?): IBinder? {
+    override fun onBind(): IBinder? {
         return null
     }
 
     override fun onCreate() {
-        super.onCreate()
-        BatteryReminderApplication.appComponent.plusBatteryComponent().inject(this)
         setAlarm()
         alertViewPresenter.initView()
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand() {
         checkBattery()
-        return START_STICKY
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         alertViewPresenter.hideAlert()
     }
 
     private fun setAlarm() {
-        val alarmManager = applicationContext.getSystemService(
-                Context.ALARM_SERVICE) as AlarmManager
-        val lIntent = Intent(getString(R.string.checkBatteryIntentAction))
-        val lPendingIntent = PendingIntent.getBroadcast(applicationContext, 0, lIntent,
+        val lIntent = Intent(context.getString(R.string.checkBatteryIntentAction))
+        val lPendingIntent = PendingIntent.getBroadcast(context, 0, lIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT)
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
                 AlarmManager.INTERVAL_FIFTEEN_MINUTES, lPendingIntent)
@@ -63,7 +54,7 @@ class BatteryService : Service() {
 
     private fun getBatteryStatusIntent(): Intent {
         val lFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        return applicationContext.registerReceiver(null, lFilter)
+        return context.registerReceiver(null, lFilter)
     }
 
     private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {

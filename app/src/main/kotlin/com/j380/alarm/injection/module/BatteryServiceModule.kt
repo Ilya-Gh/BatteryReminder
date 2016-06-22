@@ -1,5 +1,6 @@
 package com.j380.alarm.injection.module
 
+import android.app.AlarmManager
 import android.content.Context
 import android.graphics.PixelFormat
 import android.media.AudioManager
@@ -8,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import com.j380.alarm.injection.annotation.PerService
+import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.presenter.AlertViewPresenter
 import com.j380.alarm.presenter.AlertViewPresenterImpl
+import com.j380.alarm.service.BatteryServicePresenter
+import com.j380.alarm.service.BatteryServicePresenterImpl
 import dagger.Module
 import dagger.Provides
 
@@ -22,6 +26,21 @@ class BatteryServiceModule {
             windowManager: WindowManager, inflater: LayoutInflater, params: LayoutParams):
             AlertViewPresenter {
         return AlertViewPresenterImpl(context, audioManager, windowManager, inflater, params)
+    }
+
+    @Provides
+    @PerService
+    fun provideBatteryServicePresenter(context: Context, alertViewPresenter: AlertViewPresenter,
+            batteryInteractor: BatteryInteractor, alarmManager: AlarmManager):
+            BatteryServicePresenter {
+        return BatteryServicePresenterImpl(alertViewPresenter, batteryInteractor, context,
+                alarmManager)
+    }
+
+    @Provides
+    @PerService
+    fun provideAlarmManager(context: Context): AlarmManager {
+        return context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     }
 
     @Provides

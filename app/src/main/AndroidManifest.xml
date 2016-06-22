@@ -21,7 +21,7 @@
         </activity>
 
         <service
-                android:name=".BatteryService"
+                android:name=".service.BatteryService"
                 android:launchMode="singleTask"
                 />
 

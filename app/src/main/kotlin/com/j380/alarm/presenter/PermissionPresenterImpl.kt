@@ -9,7 +9,7 @@ import com.j380.alarm.view.PermissionView
 class PermissionPresenterImpl(val context: Context, val intentInteractor: IntentInteractor) :
         PermissionPresenter {
 
-    private val REQUEST_CODE = 1;
+    val REQUEST_CODE = 1;
 
     private lateinit var view: PermissionView
 
