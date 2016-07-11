@@ -21,11 +21,11 @@
         </activity>
 
         <service
-                android:name=".service.BatteryService"
+                android:name=".battery.BatteryService"
                 android:launchMode="singleTask"
                 />
 
-        <receiver android:name=".receiver.BatteryBroadcastReceiver">
+        <receiver android:name=".battery.BatteryBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
