@@ -1,4 +1,4 @@
-package com.j380.alarm.service
+package com.j380.alarm.battery
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -7,8 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import com.j380.alarm.R
-import com.j380.alarm.interactor.BatteryInteractor
-import com.j380.alarm.presenter.AlertViewPresenter
+import com.j380.alarm.battery.BatteryInteractor
+import com.j380.alarm.alert.AlertViewPresenter
 
 class BatteryServicePresenterImpl(val context: Context, val alertViewPresenter: AlertViewPresenter,
         val batteryInteractor: BatteryInteractor, val alarmManager: AlarmManager):

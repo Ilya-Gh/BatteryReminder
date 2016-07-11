@@ -1,7 +1,7 @@
-package com.j380.alarm.presenter
+package com.j380.alarm.permissions
 
 import android.content.Intent
-import com.j380.alarm.view.PermissionView
+import com.j380.alarm.permissions.PermissionView
 
 interface PermissionPresenter {
 

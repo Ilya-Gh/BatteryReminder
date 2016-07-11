@@ -1,4 +1,4 @@
-package com.j380.alarm.view
+package com.j380.alarm.permissions
 
 import android.content.ComponentName
 import android.content.Intent

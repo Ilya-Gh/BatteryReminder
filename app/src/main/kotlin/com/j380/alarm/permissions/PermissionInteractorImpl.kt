@@ -1,4 +1,4 @@
-package com.j380.alarm.interactor
+package com.j380.alarm.permissions
 
 import android.content.Context
 import android.provider.Settings

@@ -1,4 +1,4 @@
-package com.j380.alarm.interactor
+package com.j380.alarm.battery
 
 import android.content.Intent
 

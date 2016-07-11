@@ -1,7 +1,8 @@
-package com.j380.alarm.interactor
+package com.j380.alarm.battery
 
 import android.content.Intent
 import android.os.BatteryManager
+import com.j380.alarm.battery.BatteryInteractorImpl
 import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Test

@@ -1,9 +1,9 @@
-package com.j380.alarm.receiver
+package com.j380.alarm.battery
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.j380.alarm.service.BatteryService
+import com.j380.alarm.battery.BatteryService
 
 class BatteryBroadcastReceiver : BroadcastReceiver () {
 

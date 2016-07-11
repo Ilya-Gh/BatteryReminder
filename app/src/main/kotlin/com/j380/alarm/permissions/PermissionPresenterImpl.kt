@@ -1,9 +1,9 @@
-package com.j380.alarm.presenter
+package com.j380.alarm.permissions
 
 import android.content.Intent
-import com.j380.alarm.interactor.IntentInteractor
-import com.j380.alarm.interactor.PermissionInteractor
-import com.j380.alarm.view.PermissionView
+import com.j380.alarm.intent.IntentInteractor
+import com.j380.alarm.permissions.PermissionInteractor
+import com.j380.alarm.permissions.PermissionView
 
 class PermissionPresenterImpl(val intentInteractor: IntentInteractor,
         var permissionInteractor: PermissionInteractor) : PermissionPresenter {

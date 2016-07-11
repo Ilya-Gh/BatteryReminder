@@ -1,4 +1,4 @@
-package com.j380.alarm.service
+package com.j380.alarm.battery
 
 import android.os.IBinder
 

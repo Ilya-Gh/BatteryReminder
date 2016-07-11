@@ -1,10 +1,10 @@
-package com.j380.alarm.view
+package com.j380.alarm.permissions
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.j380.alarm.BatteryReminderApplication
-import com.j380.alarm.presenter.PermissionPresenter
+import com.j380.alarm.permissions.PermissionPresenter
 import javax.inject.Inject
 
 class PermissionActivity : AppCompatActivity(), PermissionView {

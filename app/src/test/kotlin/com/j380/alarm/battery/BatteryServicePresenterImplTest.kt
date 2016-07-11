@@ -1,10 +1,9 @@
-package com.j380.alarm.service
+package com.j380.alarm.battery
 
 import android.app.AlarmManager
 import android.content.Context
 import com.j380.alarm.BuildConfig
-import com.j380.alarm.interactor.BatteryInteractor
-import com.j380.alarm.presenter.AlertViewPresenter
+import com.j380.alarm.alert.AlertViewPresenter
 import com.nhaarman.mockito_kotlin.*
 import org.junit.Before
 import org.junit.Test
@@ -37,7 +36,7 @@ class BatteryServicePresenterImplTest {
         presenter.onCreate()
 
         verify(alarmManager).setRepeating(eq(AlarmManager.RTC_WAKEUP), any(), eq(AlarmManager
-                .INTERVAL_FIFTEEN_MINUTES),  any())
+                .INTERVAL_FIFTEEN_MINUTES), any())
         verify(view).initView()
     }
 

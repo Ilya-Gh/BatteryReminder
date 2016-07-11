@@ -9,11 +9,11 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import com.j380.alarm.injection.annotation.PerService
-import com.j380.alarm.interactor.BatteryInteractor
-import com.j380.alarm.presenter.AlertViewPresenter
-import com.j380.alarm.presenter.AlertViewPresenterImpl
-import com.j380.alarm.service.BatteryServicePresenter
-import com.j380.alarm.service.BatteryServicePresenterImpl
+import com.j380.alarm.battery.BatteryInteractor
+import com.j380.alarm.alert.AlertViewPresenter
+import com.j380.alarm.alert.AlertViewPresenterImpl
+import com.j380.alarm.battery.BatteryServicePresenter
+import com.j380.alarm.battery.BatteryServicePresenterImpl
 import dagger.Module
 import dagger.Provides
 
@@ -33,7 +33,7 @@ class BatteryServiceModule {
     fun provideBatteryServicePresenter(context: Context, alertViewPresenter: AlertViewPresenter,
             batteryInteractor: BatteryInteractor, alarmManager: AlarmManager):
             BatteryServicePresenter {
-        return BatteryServicePresenterImpl(context,alertViewPresenter, batteryInteractor,
+        return BatteryServicePresenterImpl(context, alertViewPresenter, batteryInteractor,
                 alarmManager)
     }
 

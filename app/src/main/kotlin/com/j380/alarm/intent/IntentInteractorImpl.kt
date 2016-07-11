@@ -1,10 +1,10 @@
-package com.j380.alarm.interactor
+package com.j380.alarm.intent
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import com.j380.alarm.service.BatteryService
+import com.j380.alarm.battery.BatteryService
 
 class IntentInteractorImpl(val context: Context) : IntentInteractor {
 

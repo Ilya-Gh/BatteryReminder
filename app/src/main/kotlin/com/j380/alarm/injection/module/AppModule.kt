@@ -6,7 +6,11 @@ import android.content.Context
 import android.media.AudioManager
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.j380.alarm.interactor.*
+import com.j380.alarm.battery.BatteryInteractor
+import com.j380.alarm.battery.BatteryInteractorImpl
+import com.j380.alarm.intent.*
+import com.j380.alarm.permissions.PermissionInteractor
+import com.j380.alarm.permissions.PermissionInteractorImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

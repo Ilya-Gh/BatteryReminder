@@ -1,4 +1,4 @@
-package com.j380.alarm.presenter;
+package com.j380.alarm.alert;
 
 interface AlertViewPresenter {
 
