@@ -8,12 +8,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
-import com.j380.alarm.injection.annotation.PerService
-import com.j380.alarm.battery.BatteryInteractor
 import com.j380.alarm.alert.AlertViewPresenter
 import com.j380.alarm.alert.AlertViewPresenterImpl
+import com.j380.alarm.alert.MediaPlayerFabric
+import com.j380.alarm.alert.MediaPlayerFabricImpl
+import com.j380.alarm.battery.BatteryInteractor
 import com.j380.alarm.battery.BatteryServicePresenter
 import com.j380.alarm.battery.BatteryServicePresenterImpl
+import com.j380.alarm.injection.annotation.PerService
 import dagger.Module
 import dagger.Provides
 
@@ -23,9 +25,10 @@ class BatteryServiceModule {
     @Provides
     @PerService
     fun provideAlertViewPresenter(context: Context, audioManager: AudioManager,
-            windowManager: WindowManager, inflater: LayoutInflater, params: LayoutParams):
-            AlertViewPresenter {
-        return AlertViewPresenterImpl(context, audioManager, windowManager, inflater, params)
+            windowManager: WindowManager, mediaPlayerFabric: MediaPlayerFabric,
+            inflater: LayoutInflater, params: LayoutParams): AlertViewPresenter {
+        return AlertViewPresenterImpl(context, audioManager, mediaPlayerFabric ,windowManager,
+                inflater, params)
     }
 
     @Provides
@@ -36,6 +39,11 @@ class BatteryServiceModule {
         return BatteryServicePresenterImpl(context, alertViewPresenter, batteryInteractor,
                 alarmManager)
     }
+
+    @Provides
+    @PerService
+    fun provideMediaPlayerFabric(context: Context): MediaPlayerFabric =
+            MediaPlayerFabricImpl(context)
 
     @Provides
     @PerService

@@ -28,6 +28,7 @@ class AlertViewPresenterImplTest {
     @Mock lateinit var audioManager: AudioManager
     @Mock lateinit var inflater: LayoutInflater
     @Mock lateinit var params: WindowManager.LayoutParams
+    @Mock lateinit var mediaPlayerFabric: MediaPlayerFabric
 
     @Mock lateinit var okButton: Button
     @Mock lateinit var view: View
@@ -38,15 +39,14 @@ class AlertViewPresenterImplTest {
     lateinit var presenter: AlertViewPresenter
 
     @Before fun setUp() {
-
         `when`(context.getString(eq(R.string.remain))).thenReturn("OK")
         `when`(inflater.inflate(eq(R.layout.layout_alert_notification), any())).thenReturn(view)
         `when`(view.findViewById(eq(R.id.okBtn))).thenReturn(okButton)
         `when`(view.findViewById(eq(R.id.remainingTv))).thenReturn(textView)
-        presenter = AlertViewPresenterImpl(context, audioManager, windowManager, inflater, params)
+        `when`(mediaPlayerFabric.getNewMediaPlayer()).thenReturn(player);
 
-//        PowerMockito.mockStatic(MediaPlayer::class.java);
-//        BDDMockito.given(MediaPlayer.create(eq(context), eq(R.raw.low))).willReturn(player);
+        presenter = AlertViewPresenterImpl(context, audioManager, mediaPlayerFabric,
+                windowManager, inflater, params)
     }
 
     @Test fun initView_setOkButtonListener() {

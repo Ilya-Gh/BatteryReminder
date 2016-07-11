@@ -12,8 +12,8 @@ import com.j380.alarm.R
 
 
 class AlertViewPresenterImpl(val context: Context, val audioManager: AudioManager,
-        val windowManager: WindowManager, val inflater: LayoutInflater, val params: LayoutParams) :
-        AlertViewPresenter {
+    val mediaPlayerFabric: MediaPlayerFabric, val windowManager: WindowManager,
+    val inflater: LayoutInflater, val params: LayoutParams) : AlertViewPresenter {
 
     private lateinit var player: MediaPlayer
 
@@ -56,7 +56,7 @@ class AlertViewPresenterImpl(val context: Context, val audioManager: AudioManage
     }
 
     private fun prepareMediaPlayer() {
-        player = MediaPlayer.create(context, R.raw.low)
+        player = mediaPlayerFabric.getNewMediaPlayer()
         setPlayerListeners()
         setVolumeToPlayer(player, getVolume())
     }
