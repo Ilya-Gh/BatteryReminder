@@ -1,20 +1,19 @@
 package com.j380.alarm.presenter
 
-import android.content.Context
 import android.content.Intent
-import android.provider.Settings
 import com.j380.alarm.interactor.IntentInteractor
+import com.j380.alarm.interactor.PermissionInteractor
 import com.j380.alarm.view.PermissionView
 
-class PermissionPresenterImpl(val context: Context, val intentInteractor: IntentInteractor) :
-        PermissionPresenter {
+class PermissionPresenterImpl(val intentInteractor: IntentInteractor,
+        var permissionInteractor: PermissionInteractor) : PermissionPresenter {
 
     val REQUEST_CODE = 1;
 
     private lateinit var view: PermissionView
 
     override fun onCreate() {
-        checkDrawOverlayPermission()
+        checkDrawOverlayPermissionAndStartService()
     }
 
     override fun setView(view: PermissionView) {
@@ -23,24 +22,27 @@ class PermissionPresenterImpl(val context: Context, val intentInteractor: Intent
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         if (requestCode == REQUEST_CODE) {
-            if (Settings.canDrawOverlays(context)) {
-                startBatteryService()
+            if (isDrawOverlayPermissionGranted()) {
+                startBatteryServiceAndCloseActivity()
             }
         }
     }
 
-    private fun checkDrawOverlayPermission() {
-        if (!Settings.canDrawOverlays(context)) {
+    private fun checkDrawOverlayPermissionAndStartService() {
+        if (isDrawOverlayPermissionGranted()) {
+            startBatteryServiceAndCloseActivity()
+        } else {
             view.startActivityForResult(intentInteractor.getRequestPermissionIntent(),
                     REQUEST_CODE);
-        } else {
-            startBatteryService()
         }
     }
 
-    private fun startBatteryService() {
+    private fun startBatteryServiceAndCloseActivity() {
         view.startService(intentInteractor.getStartBatteryServiceIntent())
         view.closeActivity()
+    }
 
+    private fun isDrawOverlayPermissionGranted(): Boolean {
+        return permissionInteractor.isDrawOverlayPermissionGranted()
     }
 }

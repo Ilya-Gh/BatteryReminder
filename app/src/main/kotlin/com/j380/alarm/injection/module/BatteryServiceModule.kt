@@ -33,7 +33,7 @@ class BatteryServiceModule {
     fun provideBatteryServicePresenter(context: Context, alertViewPresenter: AlertViewPresenter,
             batteryInteractor: BatteryInteractor, alarmManager: AlarmManager):
             BatteryServicePresenter {
-        return BatteryServicePresenterImpl(alertViewPresenter, batteryInteractor, context,
+        return BatteryServicePresenterImpl(context,alertViewPresenter, batteryInteractor,
                 alarmManager)
     }
 

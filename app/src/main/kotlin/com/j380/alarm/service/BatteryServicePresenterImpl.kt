@@ -10,9 +10,9 @@ import com.j380.alarm.R
 import com.j380.alarm.interactor.BatteryInteractor
 import com.j380.alarm.presenter.AlertViewPresenter
 
-class BatteryServicePresenterImpl(val alertViewPresenter: AlertViewPresenter,
-        val batteryInteractor: BatteryInteractor, val context: Context,
-        val alarmManager: AlarmManager): BatteryServicePresenter {
+class BatteryServicePresenterImpl(val context: Context, val alertViewPresenter: AlertViewPresenter,
+        val batteryInteractor: BatteryInteractor, val alarmManager: AlarmManager):
+        BatteryServicePresenter {
 
     private val LOW_BATTERY_LEVEL = 25f
 
@@ -44,11 +44,10 @@ class BatteryServicePresenterImpl(val alertViewPresenter: AlertViewPresenter,
     }
 
     private fun checkBattery() {
-        batteryStatus = getBatteryStatusIntent()
-        batteryInteractor.setBatteryStatus(batteryStatus)
+        batteryInteractor.setBatteryStatus(getBatteryStatusIntent())
 
         if (batteryInteractor.isNotPluggedIn()) {
-            showViewIfBatteryLevelIsLow(batteryInteractor.getBatteryLevel())
+            showAlertIfBatteryLevelIsLow(batteryInteractor.getBatteryLevel())
         }
     }
 
@@ -57,7 +56,7 @@ class BatteryServicePresenterImpl(val alertViewPresenter: AlertViewPresenter,
         return context.registerReceiver(null, lFilter)
     }
 
-    private fun showViewIfBatteryLevelIsLow(batteryLevel: Int) {
+    private fun showAlertIfBatteryLevelIsLow(batteryLevel: Int) {
         if (batteryLevel <= LOW_BATTERY_LEVEL) {
             alertViewPresenter.showLowBatteryAlert(batteryLevel)
         }

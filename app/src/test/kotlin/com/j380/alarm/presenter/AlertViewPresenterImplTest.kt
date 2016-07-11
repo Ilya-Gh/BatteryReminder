@@ -14,16 +14,13 @@ import com.j380.alarm.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.invocation.InvocationOnMock
-import org.powermock.api.mockito.PowerMockito
-import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
+import org.mockito.runners.MockitoJUnitRunner
 
-@RunWith(PowerMockRunner::class)
-@PrepareForTest(MediaPlayer::class)
+
+@RunWith(MockitoJUnitRunner::class)
 class AlertViewPresenterImplTest {
 
     @Mock lateinit var context: Context
@@ -48,8 +45,8 @@ class AlertViewPresenterImplTest {
         `when`(view.findViewById(eq(R.id.remainingTv))).thenReturn(textView)
         presenter = AlertViewPresenterImpl(context, audioManager, windowManager, inflater, params)
 
-        PowerMockito.mockStatic(MediaPlayer::class.java);
-        BDDMockito.given(MediaPlayer.create(eq(context), eq(R.raw.low))).willReturn(player);
+//        PowerMockito.mockStatic(MediaPlayer::class.java);
+//        BDDMockito.given(MediaPlayer.create(eq(context), eq(R.raw.low))).willReturn(player);
     }
 
     @Test fun initView_setOkButtonListener() {

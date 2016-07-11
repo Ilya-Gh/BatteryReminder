@@ -6,10 +6,7 @@ import android.content.Context
 import android.media.AudioManager
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.j380.alarm.interactor.BatteryInteractor
-import com.j380.alarm.interactor.BatteryInteractorImpl
-import com.j380.alarm.interactor.IntentInteractor
-import com.j380.alarm.interactor.IntentInteractorImpl
+import com.j380.alarm.interactor.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -28,6 +25,11 @@ class AppModule(private val application: Application) {
     @Provides
     @Singleton
     fun provideIntentInteractor(context: Context): IntentInteractor = IntentInteractorImpl(context)
+
+    @Provides
+    @Singleton
+    fun providePermissionInteractor(context: Context): PermissionInteractor =
+            PermissionInteractorImpl(context)
 
     @Provides
     @Singleton
