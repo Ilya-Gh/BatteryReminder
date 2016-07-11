@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import com.j380.alarm.R
-import com.j380.alarm.battery.BatteryInteractor
 import com.j380.alarm.alert.AlertViewPresenter
 
 class BatteryServicePresenterImpl(val context: Context, val alertViewPresenter: AlertViewPresenter,
@@ -15,8 +14,6 @@ class BatteryServicePresenterImpl(val context: Context, val alertViewPresenter: 
         BatteryServicePresenter {
 
     private val LOW_BATTERY_LEVEL = 25f
-
-    private lateinit var batteryStatus: Intent
 
     override fun onBind(): IBinder? {
         return null
