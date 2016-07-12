@@ -28,7 +28,7 @@ class AlertViewPresenterImplTest {
     @Mock lateinit var audioManager: AudioManager
     @Mock lateinit var inflater: LayoutInflater
     @Mock lateinit var params: WindowManager.LayoutParams
-    @Mock lateinit var mediaPlayerFabric: MediaPlayerFabric
+    @Mock lateinit var mediaPlayerFactory: MediaPlayerFactory
 
     @Mock lateinit var okButton: Button
     @Mock lateinit var view: View
@@ -43,9 +43,9 @@ class AlertViewPresenterImplTest {
         `when`(inflater.inflate(eq(R.layout.layout_alert_notification), any())).thenReturn(view)
         `when`(view.findViewById(eq(R.id.okBtn))).thenReturn(okButton)
         `when`(view.findViewById(eq(R.id.remainingTv))).thenReturn(textView)
-        `when`(mediaPlayerFabric.getNewMediaPlayer()).thenReturn(player);
+        `when`(mediaPlayerFactory.getNewMediaPlayer()).thenReturn(player);
 
-        presenter = AlertViewPresenterImpl(context, audioManager, mediaPlayerFabric,
+        presenter = AlertViewPresenterImpl(context, audioManager, mediaPlayerFactory,
                 windowManager, inflater, params)
     }
 

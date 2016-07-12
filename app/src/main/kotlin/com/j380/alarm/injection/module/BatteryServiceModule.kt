@@ -10,8 +10,8 @@ import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
 import com.j380.alarm.alert.AlertViewPresenter
 import com.j380.alarm.alert.AlertViewPresenterImpl
-import com.j380.alarm.alert.MediaPlayerFabric
-import com.j380.alarm.alert.MediaPlayerFabricImpl
+import com.j380.alarm.alert.MediaPlayerFactory
+import com.j380.alarm.alert.MediaPlayerFactoryImpl
 import com.j380.alarm.battery.BatteryInteractor
 import com.j380.alarm.battery.BatteryServicePresenter
 import com.j380.alarm.battery.BatteryServicePresenterImpl
@@ -25,9 +25,9 @@ class BatteryServiceModule {
     @Provides
     @PerService
     fun provideAlertViewPresenter(context: Context, audioManager: AudioManager,
-            windowManager: WindowManager, mediaPlayerFabric: MediaPlayerFabric,
+            windowManager: WindowManager, mediaPlayerFactory: MediaPlayerFactory,
             inflater: LayoutInflater, params: LayoutParams): AlertViewPresenter {
-        return AlertViewPresenterImpl(context, audioManager, mediaPlayerFabric ,windowManager,
+        return AlertViewPresenterImpl(context, audioManager, mediaPlayerFactory,windowManager,
                 inflater, params)
     }
 
@@ -42,8 +42,8 @@ class BatteryServiceModule {
 
     @Provides
     @PerService
-    fun provideMediaPlayerFabric(context: Context): MediaPlayerFabric =
-            MediaPlayerFabricImpl(context)
+    fun provideMediaPlayerFabric(context: Context): MediaPlayerFactory =
+            MediaPlayerFactoryImpl(context)
 
     @Provides
     @PerService

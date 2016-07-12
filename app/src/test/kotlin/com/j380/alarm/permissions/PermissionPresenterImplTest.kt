@@ -3,9 +3,6 @@ package com.j380.alarm.permissions
 import android.app.Activity
 import android.content.Intent
 import com.j380.alarm.intent.IntentInteractor
-import com.j380.alarm.permissions.PermissionInteractor
-import com.j380.alarm.permissions.PermissionPresenterImpl
-import com.j380.alarm.permissions.PermissionView
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
